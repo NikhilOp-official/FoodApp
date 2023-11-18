@@ -2,6 +2,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -25,22 +26,27 @@ const Body = () => {
     setFilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
   };
 
+
+  const isOnline=useOnlineStatus()
+
+  if(isOnline===false) return <h1>Looks like you are offline!! please check your interet connection</h1>
+
   return listOfRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="flex  items-center">
+        <div className="">
           {" "}
           <input
             type="text"
-            className="search-box"
+            className="ml-4 my-5 border-solid border-2 border-black-500 "
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
-          <button
+          <button className="ml-3 mr-7 bg-green-500 rounded-lg px-2 py-1"
             onClick={() => {
             const filteredRestaurant = listOfRestaurants.filter(
                 (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase()) 
@@ -51,9 +57,9 @@ const Body = () => {
             Search 
           </button>
         </div>
-
+            <div className="">
         <button
-          className="filter-btn"
+          className="ml-3 my-5 mr-7 bg-green-500 rounded-lg px-2 py-1"
           onClick={() => {
             const filteredList = listOfRestaurants.filter(
               (res) => res.info.avgRatingString > 4
@@ -62,10 +68,10 @@ const Body = () => {
           }}
         >
           Top rated restaurants
-        </button>
+        </button></div>
       </div>
 
-      <div className="res-container">
+      <div className=" flex flex-wrap">
       {filteredRestaurant.map((restaurant) => (
          <Link  key={restaurant.info.id} to={"/restaurant/"+restaurant.info.id}><RestaurantCard resData={restaurant} /></Link>
         ))}
