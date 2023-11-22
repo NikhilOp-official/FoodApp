@@ -18,7 +18,7 @@ const  isOnline= useOnlineStatus()
       </div>
       <div className="nav-items"></div>
       <ul className="flex items-center">
-        <li className=" ml-14">Online Status:{isOnline?"online":"offline"}</li>
+        <li className=" ml-14">Online Status:{isOnline?"🟢":"🔴"}</li>
       <Link to={"/"}><li  className=" ml-14">Home</li></Link>
        <Link to={"/about"}> <li  className=" ml-14">About Us</li></Link>
        <Link to={"/contact"}><li  className=" ml-14">Contact Us</li></Link>
