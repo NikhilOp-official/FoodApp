@@ -9,16 +9,20 @@ import Cart from "./components/Cart";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Shimmer from "./components/Shimmer";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 
 const Grocery=lazy(()=>import("./components/Grocery"))
 
 const AppLayout = () => {
   return (
+    <Provider store={appStore}>
     <div className="app">     
       <Header />
       <Outlet/>
     </div>
+    </Provider>
   );
 };
 

@@ -22,7 +22,7 @@ const Body = () => {
     );
 
     const json = await data.json();
-    console.log(json);
+    // console.log(json);
     setListOfRestaurants(
       json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
@@ -39,7 +39,7 @@ const Body = () => {
     return (
       <h1>Looks like you are offline!! please check your interet connection</h1>
     );
-    console.log(listOfRestaurants)
+    // console.log(listOfRestaurants)
 
   return listOfRestaurants.length === 0 ? (
     <Shimmer />

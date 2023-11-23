@@ -2,13 +2,14 @@ import { useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
-
-
+import  {useSelector} from "react-redux";
 
 const Header = () => {
   const [btnName,setBtnName]=useState("Login");
   
 const  isOnline= useOnlineStatus()
+//subscribing to the store useing useselector hook 
+const cartItems = useSelector((store)=>store.cart.items)
 
 
   return (
@@ -23,7 +24,7 @@ const  isOnline= useOnlineStatus()
        <Link to={"/about"}> <li  className=" ml-14">About Us</li></Link>
        <Link to={"/contact"}><li  className=" ml-14">Contact Us</li></Link>
        <Link to={"/grocery"}><li  className=" ml-14">Grocery</li></Link>
-       <Link to={"/cart"}><li  className=" ml-14">Cart</li></Link>
+       <Link to={"/cart"}><li  className=" ml-14">Cart({cartItems.length}-items)</li></Link>
         <button
           className="mx-14"
           onClick={() => {
